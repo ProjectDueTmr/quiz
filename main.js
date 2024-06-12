@@ -6,8 +6,12 @@ const answerButtonElement = document.getElementById('answerButtons')
 
 
 let shuffleQuestions, currentQuestionsIndex
-questionElement = element;
+
 startButton.addEventListener('click', startGame)
+nextButton.addEventListener('click', () => {
+    currentQuestionsIndex++
+    setNextQuestion()
+})
 
 
 function startGame(){
@@ -38,6 +42,7 @@ function showQuestion(question) {
 }
 
 function resetState() {
+    clearStatusClass(document.body)
     nextButton.classList.add('hide')
     while(answerButtonElement.firstChild) {
         answerButtonElement.removeChild
@@ -52,6 +57,13 @@ function selectAnswer(e) {
     Array.from(answerButtonElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
+    if(shuffleQuestions.length > currentQuestionsIndex + 1) {
+    
+        nextButton.classList.remove('hide')
+    }  else {
+        startButton.innerText = 'Restart?'
+        startButton.classList.remove('hide')
+    }
 }
 
 function setStatusClass(element, correct){
@@ -63,7 +75,7 @@ function setStatusClass(element, correct){
     }
 }
 
-function clearStatusClass(){
+function clearStatusClass(element){
     element.classList.remove('correct')
     element.classList.remove('wrong')
 }
@@ -75,5 +87,30 @@ const questions = [
             {text: '4', correct: true},
             {text: '22', correct: false},
         ]
+    },
+    {
+      question: 'Who is the best YouTuber?',
+      answers: [
+        { text: 'Web Dev Simplified', correct: true },
+        { text: 'Traversy Media', correct: true },
+        { text: 'Dev Ed', correct: true },
+        { text: 'Fun Fun Function', correct: true }
+      ]
+    },
+    {
+      question: 'Is web development fun?',
+      answers: [
+        { text: 'Kinda', correct: false },
+        { text: 'YES!!!', correct: true },
+        { text: 'Um no', correct: false },
+        { text: 'IDK', correct: false }
+      ]
+    },
+    {
+      question: 'What is 4 * 2?',
+      answers: [
+        { text: '6', correct: false },
+        { text: '8', correct: true }
+      ]
     }
 ]
