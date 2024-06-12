@@ -6,7 +6,7 @@ const answerButtonElement = document.getElementById('answerButtons')
 
 
 let shuffleQuestions, currentQuestionsIndex
-
+questionElement = element;
 startButton.addEventListener('click', startGame)
 
 
